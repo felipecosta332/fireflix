@@ -3,6 +3,7 @@ import {
   getFirestore,
   collection,
   getDocs,
+  onSnapshot,
   addDoc,
   deleteDoc,
   doc,
@@ -32,6 +33,14 @@ getDocs(colRef)
   .catch((error) => {
     console.log(error);
   });
+
+// onSnapshot(colRef, (data) => {
+//   let movies = [];
+//   data.docs.forEach((document) => {
+//     movies.push({ ...document.data(), id: document.id });
+//   });
+//   console.log(movies);
+// });
 
 const addForm = document.querySelector(".add");
 addForm.addEventListener("submit", (event) => {
