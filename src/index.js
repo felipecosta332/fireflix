@@ -94,3 +94,46 @@ updateForm.addEventListener("submit", (event) => {
     updateForm.reset();
   });
 });
+
+const registerForm = document.querySelector(".register");
+registerForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  createUserWithEmailAndPassword(
+    auth,
+    registerForm.email.value,
+    registerForm.password.value
+  )
+    .then((credentials) => {
+      // console.log(credentials);
+      registerForm.reset();
+    })
+    .catch((error) => console.log(error));
+});
+
+const logoutButton = document.querySelector(".logout");
+logoutButton.addEventListener("click", (event) => {
+  signOut(auth)
+    .then(() => {
+      console.log("User Logged Out!");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+const loginForm = document.querySelector(".login");
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  signInWithEmailAndPassword(
+    auth,
+    loginForm.email.value,
+    loginForm.password.value
+  )
+    .then((credentials) => {
+      console.log(credentials.user);
+      loginForm.reset();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
