@@ -11,6 +11,7 @@ import {
   where,
   orderBy,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -71,5 +72,17 @@ deleteForm.addEventListener("submit", (event) => {
   const documentReference = doc(db, "movies", deleteForm.id.value);
   deleteDoc(documentReference).then(() => {
     deleteForm.reset();
+  });
+});
+
+const updateForm = document.querySelector(".update");
+updateForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const documentReference = doc(db, "movies", updateForm.id.value);
+  updateDoc(documentReference, {
+    name: updateForm.name.value,
+    updatedAt: serverTimestamp(),
+  }).then(() => {
+    updateForm.reset();
   });
 });
