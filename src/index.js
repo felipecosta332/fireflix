@@ -13,6 +13,12 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBGHGnHTIJw6GqFXePb9zuEXzQ3a6dTz4E",
@@ -25,12 +31,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
+const auth = getAuth();
 const colRef = collection(db, "movies");
 const qRef = query(
   colRef,
   where("category", "==", "drama"),
   orderBy("createdAt")
 );
+// const documentReference = doc(db, "movies", "grahyhnseynhse");
 
 getDocs(colRef)
   .then((data) => {
